@@ -27,7 +27,7 @@ const Diary = ({
     }))
   },[])
   
-  const tags = ["TagTagTagTag", "Tag", "Tag", "Tag"];
+  const tags = ["TagTagTagTag", "TagTagTagTag", "TagTagTagTag", "TagTagTagTag"];
 
   return (
     <CustomDiary animate={animation} custom={custom}>
@@ -55,7 +55,7 @@ const Diary = ({
 };
 
 const CustomDiary = styled(motion.div)`
-  width: 90%;
+  width: 95%;
   color: black;
   background: white;
   border-radius: 5px;

@@ -38,13 +38,13 @@ const DiaryList = ({}) => {
     return testList.slice(0, 5);
   });
   
-  const changePage = (page: number) => {
+  const changePage = (page: number):void => {
     const selectedDiaryList = testList.slice(5 * (page -1), 5 * (page -1) + 5);
     setDiaryList(selectedDiaryList);
     animateDiary();
   }
 
-  const animateDiary = () => {
+  const animateDiary = ():void => {
     animation.start(custom => ({
       opacity: [0, 0, 1],
       x:[-50, 0],
@@ -75,7 +75,7 @@ const DiaryList = ({}) => {
 };
 
 const DiaryWrapper = styled.div`
-  width: 70%;
+  width: 75%;
   min-height: 635px;
 `
 
