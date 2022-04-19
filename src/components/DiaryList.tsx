@@ -8,12 +8,11 @@ const DiaryList = ({}) => {
 
   const animation = useAnimation();
 
-  // const testList = Array(25).fill({title: "test", content: "testtesttesettesttesttesttest"});
   const testList: {title: string, content: string}[] = [
-      {title: "test", content: "testtesttesettesttesttesttest"},
-      {title: "tティest", content: "testtesttesettesttesttesttest"},
-      {title: "test", content: "testtesttesettesttesttesttest"},
-      {title: "test", content: "testtesttesettesttesttesttest"},
+      {title: "test", content: "ここも英字じゃなければ大きさ変わるかお"},
+      {title: "tティest", content: "ここも英字じゃなければ大きさ変わるかお"},
+      {title: "test", content: "ここも英字じゃなければ大きさ変わるかお"},
+      {title: "test", content: "ここも英字じゃなければ大きさ変わるかお"},
       {title: "ティシs", content: "testtesttesettesttesttesttest"},
       {title: "test", content: "testtesttesettesttesttesttest"},
       {title: "ティシs", content: "testtesttesettesttesttesttest"},
@@ -46,8 +45,7 @@ const DiaryList = ({}) => {
 
   const animateDiary = ():void => {
     animation.start(custom => ({
-      opacity: [0, 0, 1],
-      x:[-50, 0],
+      opacity: [0, 1],
       transition: {
         duration: 0.8 + custom * 0.1
       }

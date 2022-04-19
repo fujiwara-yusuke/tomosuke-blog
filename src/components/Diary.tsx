@@ -19,8 +19,7 @@ const Diary = ({
 
   useEffect(() => {
     animation.start(custom => ({
-      opacity: [0, 0, 1],
-      x:[-50, 0],
+      opacity: [0, 1],
       transition: {
         duration: 0.8 + custom * 0.1
       }
@@ -77,6 +76,7 @@ const CustomDiary = styled(motion.div)`
   }
   .diary_content{
     padding: 5px;
+    font-size: 13px;
   }
   .info{
     display: flex;

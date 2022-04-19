@@ -8,8 +8,7 @@ import { tomorrowNight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 const Diary = () => {
 
   const animationSetting = {
-    opacity: [0, 0, 1],
-    x:[-50, 0],
+    opacity: [0, 1],
     transition: {
       duration: 1
     }
@@ -104,7 +103,7 @@ const Diary = () => {
 }
 
 const CustomDiary = styled(motion.div)`
-  width: 75%;
+  width: 100%;
   opacity: 0;
   min-height: 635px;
   background: #f7f7f7;
@@ -130,7 +129,7 @@ const CustomDiary = styled(motion.div)`
     margin-right: 5px;
   }
   .markdown{
-    margin: 15px
+    margin: 15px 25px;
   }
 `
 

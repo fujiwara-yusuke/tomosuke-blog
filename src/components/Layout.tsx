@@ -2,7 +2,6 @@ import Head from 'next/head';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import TopHeader from 'components/TopHeader'
-import Aside from 'components/Aside'
 
 type Props = {
   children?: ReactNode;
@@ -17,7 +16,6 @@ const Layout = ({ children }: Props) => {
       <TopHeader/>
       <Main>
         {children}
-        <Aside/>
       </Main>
       <footer className=''></footer>
     </>

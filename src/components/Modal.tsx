@@ -1,23 +1,25 @@
+import { ReactNode } from 'react';
 import styled from "styled-components";
 import { motion, useAnimation } from "framer-motion";
-import CloseIcon from '@mui/icons-material/Close';
 import { useEffect } from "react";
 
 interface Props {
-  isDisplayModal: boolean,
-  setIsDisplyaModal: (isDisplayModal: boolean) => void
+  showModal: boolean,
+  clickClose: (showModal: boolean) => void,
+  children: ReactNode
 }
 
 const Modal = ({
-  isDisplayModal,
-  setIsDisplyaModal
+  showModal,
+  clickClose,
+  children
 }:Props) => {
 
   const modalAnimation = useAnimation();
   const overlayAnimation = useAnimation();
 
   useEffect(() => {
-    if(isDisplayModal){
+    if(showModal){
       modalAnimation.start({
         display: "initial",
         x: [-500, 0],
@@ -50,10 +52,10 @@ const Modal = ({
         transitionEnd: { display: "none" }
       })
     }
-  },[isDisplayModal])
+  },[showModal])
   
   const closeModal = () => {
-    setIsDisplyaModal(false);
+    clickClose(false);
   }
 
   return(
@@ -63,10 +65,7 @@ const Modal = ({
         onClick={closeModal}
       />
       <CustomModal animate={modalAnimation}>
-        <div className="modal_head">
-          <div className="title">modal</div>
-          <CloseIcon onClick={closeModal}/>
-        </div>
+        {children}
       </CustomModal>
     </>
   )
@@ -90,15 +89,6 @@ const ModalOveray = styled(motion.div)`
   background: #010c1f;
   width: 30%;
   height: 100%;
-  .modal_head{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 20px;
-  }
-  .title{
-
-  }
 `
 
 export default Modal;
