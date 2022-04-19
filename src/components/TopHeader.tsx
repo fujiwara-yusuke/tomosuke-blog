@@ -14,7 +14,7 @@ module ModalList {
 
 const TopHeader = () => {
 
-  const menuList:string[] = ["Tags", "Ranking", "other"];
+  const menuList:string[] = ["Tags", "Ranking", "Other"];
   const [isDisplayModal, setIsDisplyaModal] = useState<boolean>(false);
   const [selectedModalMenu, setSelectedModalMenu] = useState<number>(0);
   const showModal = (index: number) => {
