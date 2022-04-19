@@ -63,13 +63,13 @@ const CustomDiary = styled(motion.div)`
   border-radius: 5px;
   margin: auto;
   margin-top: 10px;
-  height: 110px;
   opacity: 0;
   padding: 10px 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 70%;
+  height: 110px;
+
   h2{
     padding-left: 5px;
     margin: 0px;
@@ -85,9 +85,7 @@ const CustomDiary = styled(motion.div)`
   }
   .tag_list{
     display: flex;
-    flex-wrap: wrap;
     padding: 5px;
-    height: 30%;
   }
   .tag_list div {
     display: flex;
