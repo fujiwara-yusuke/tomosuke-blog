@@ -39,16 +39,19 @@ const Diary = ({
           </a>
         </Link>
       </div>
-      <div className='tag_list'>
-        {
-          tags.map(tag => {
-            return(
-            <div>
-              <span className='tag_name'>{tag}</span>
-            </div>
-            )
-          })
-        }
+      <div className='info'>
+        <div className='tag_list'>
+          {
+            tags.map((tag, index) => {
+              return(
+              <div key={index}>
+                <span className='tag_name'>{tag}</span>
+              </div>
+              )
+            })
+          }
+        </div>
+        <div>2022/01/01 00:00</div>
       </div>
     </CustomDiary>
   );
@@ -63,24 +66,36 @@ const CustomDiary = styled(motion.div)`
   margin-top: 10px;
   height: 110px;
   opacity: 0;
-  padding: 15px 15px 15px 40px;
+  padding: 10px 15px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  height: 70%;
   h2{
-    margin: 15px;
+    padding-left: 5px;
+    margin: 0px;
+  }
+  .diary_content{
+    padding: 5px;
+  }
+  .info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   .tag_list{
     display: flex;
     flex-wrap: wrap;
+    padding: 5px;
+    height: 30%;
   }
   .tag_list div {
-    width: 50%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    margin-right: 10px;
   }
   .tag_name{
-    padding: 5px;
+    padding: 2px;
     background: #010c1f;
     color: #FFF;
     font-size: 10px;

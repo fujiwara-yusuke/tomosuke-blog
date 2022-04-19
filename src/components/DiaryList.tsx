@@ -11,11 +11,11 @@ const DiaryList = ({}) => {
   // const testList = Array(25).fill({title: "test", content: "testtesttesettesttesttesttest"});
   const testList: {title: string, content: string}[] = [
       {title: "test", content: "testtesttesettesttesttesttest"},
-      {title: "test", content: "testtesttesettesttesttesttest"},
-      {title: "test", content: "testtesttesettesttesttesttest"},
+      {title: "tティest", content: "testtesttesettesttesttesttest"},
       {title: "test", content: "testtesttesettesttesttesttest"},
       {title: "test", content: "testtesttesettesttesttesttest"},
       {title: "ティシs", content: "testtesttesettesttesttesttest"},
+      {title: "test", content: "testtesttesettesttesttesttest"},
       {title: "ティシs", content: "testtesttesettesttesttesttest"},
       {title: "ティシs", content: "testtesttesettesttesttesttest"},
       {title: "ティシs", content: "testtesttesettesttesttesttest"},
@@ -57,19 +57,21 @@ const DiaryList = ({}) => {
   return (
     <DiaryWrapper>
       <CustomPagination count={MAXPAGINATION} onChange={(_,number) => changePage(number)} variant="outlined" color="primary" />
-      {
-        diaryList.map((diary, index) => {
-          return(
-            <Diary
-              title={diary.title}
-              content={diary.content}
-              key={index}
-              animation={animation}
-              custom={index % 5}
-            />
-          )
-        })
-      }
+      <div className='diary_list'>
+        {
+          diaryList.map((diary, index) => {
+            return(
+              <Diary
+                title={diary.title}
+                content={diary.content}
+                key={index}
+                animation={animation}
+                custom={index % 5}
+              />
+            )
+          })
+        }
+      </div>
     </DiaryWrapper>
   );
 };

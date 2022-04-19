@@ -31,9 +31,9 @@ const TopHeader = () => {
           </Link>
           <div className='menu_list'>
             {
-              menuList.map(memu => {
+              menuList.map((memu, index) => {
                 return(
-                  <div className='menu' onClick={showModal}>{memu}</div>
+                  <div className='menu' key={index} onClick={showModal}>{memu}</div>
                 )
               })
             }
