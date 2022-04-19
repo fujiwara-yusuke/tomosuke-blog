@@ -54,7 +54,7 @@ const TitleWrapper = styled.header`
 `
 
 const Title = styled.div`
-  background: #FFF;
+  background: #f7f7f7;
   border-radius: 10px;
   height: 100px;
   display: flex;

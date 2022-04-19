@@ -57,7 +57,7 @@ const Diary = ({
 const CustomDiary = styled(motion.div)`
   width: 95%;
   color: black;
-  background: white;
+  background: #f7f7f7;
   border-radius: 5px;
   margin: auto;
   margin-top: 10px;
@@ -81,7 +81,7 @@ const CustomDiary = styled(motion.div)`
   }
   .tag_name{
     padding: 5px;
-    background: black;
+    background: #010c1f;
     color: #FFF;
     font-size: 10px;
   }

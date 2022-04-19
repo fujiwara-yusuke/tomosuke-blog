@@ -107,7 +107,7 @@ const CustomDiary = styled(motion.div)`
   width: 75%;
   opacity: 0;
   min-height: 635px;
-  background: #FFFFFF;
+  background: #f7f7f7;
   border-radius: 5px;
   color: black;
   h1.title{

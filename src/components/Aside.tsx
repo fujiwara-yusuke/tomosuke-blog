@@ -28,7 +28,7 @@ const CustomAside = styled.aside`
   padding-left: 10px;
   .aside_wrapper {
     height: 100%;
-    background: #FFFFFF;
+    background: #f7f7f7;
     color: black;
     border-radius: 5px;
   }
