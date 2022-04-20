@@ -18,39 +18,39 @@ const Modal = ({
   const modalAnimation = useAnimation();
   const overlayAnimation = useAnimation();
 
+  const variants = {
+    hidden: { display: 'none' },
+    openOverlay: {
+      display: "initial",
+      opacity: [0, 0.8],
+      transition:{ duration: 1 }
+    },
+    openModal: {
+      display: "initial",
+      x: [-500, 0],
+      transition:{ duration: 1 },
+    },
+    closeOverlay:{
+      opacity: [0.8, 0],
+      transition:{ duration: 1 },
+      transitionEnd: { display: "none" }
+    },
+    closeModal:{
+      x: [0,  -500],
+      transition:{ duration: 1 },
+      transitionEnd: { display: "none" }
+    }
+  }
+
   useEffect(() => {
     if(showModal){
-      modalAnimation.start({
-        display: "initial",
-        x: [-500, 0],
-        transition:{
-          duration: 1
-        },
-      })
-
-      overlayAnimation.start({
-        display: "initial",
-        opacity: [0, 0.8],
-        transition:{
-          duration: 1
-        },
-      })
+      modalAnimation.start('openModal');
+      overlayAnimation.start('openOverlay');
+      document.body.style.overflow = 'hidden';
     }else{
-      modalAnimation.start({
-        x: [0,  -500],
-        transition:{
-          duration: 1
-        },
-        transitionEnd: { display: "none" }
-      })
-
-      overlayAnimation.start({
-        opacity: [0.8, 0],
-        transition:{
-          duration: 1
-        },
-        transitionEnd: { display: "none" }
-      })
+      modalAnimation.start('closeModal');
+      overlayAnimation.start('closeOverlay');
+      document.body.style.overflow = '';
     }
   },[showModal])
   
@@ -61,10 +61,14 @@ const Modal = ({
   return(
     <>
       <ModalOveray
+        variants={variants}
         animate={overlayAnimation}
         onClick={closeModal}
       />
-      <CustomModal animate={modalAnimation}>
+      <CustomModal 
+        variants={variants}
+        animate={modalAnimation}
+      >
         {children}
       </CustomModal>
     </>
