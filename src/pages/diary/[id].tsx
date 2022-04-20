@@ -111,12 +111,12 @@ const CustomDiary = styled(motion.div)`
   color: black;
   h1.title{
     font-size: 45px;
-    margin: 15px;
+    margin: 15px 25px;
   }
   .diary_info{
     display: flex;
     justify-content: space-between;
-    margin: 0px 15px;
+    margin: 0px 25px;
   }
   .tags_wrapper{
     display: flex;
