@@ -1,0 +1,7 @@
+FROM node:latest
+ENV NODE_VERSION 16.14.2
+WORKDIR /frontend
+COPY ./ /frontend/
+RUN yarn install
+EXPOSE 3000
+ENV CI=true
