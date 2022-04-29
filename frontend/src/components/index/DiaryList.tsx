@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useAnimation } from "framer-motion";
 import styled from 'styled-components';
-import Diary from 'components/Diary';
+import DiaryHeading from 'components/index/DiaryHeading';
 import Pagination from '@mui/material/Pagination';
 
 const DiaryList = ({}) => {
@@ -59,7 +59,7 @@ const DiaryList = ({}) => {
         {
           diaryList.map((diary, index) => {
             return(
-              <Diary
+              <DiaryHeading
                 title={diary.title}
                 content={diary.content}
                 key={index}

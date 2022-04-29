@@ -10,7 +10,7 @@ interface Props {
   custom: number
 }
 
-const Diary = ({
+const DiaryHeading = ({
   title,
   content,
   animation,
@@ -100,4 +100,4 @@ const CustomDiary = styled(motion.div)`
   }
 `
   
-export default Diary;
+export default DiaryHeading;

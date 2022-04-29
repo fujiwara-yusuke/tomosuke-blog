@@ -2,7 +2,7 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import { motion } from "framer-motion";
 
-const Aside = () => {
+const TopAside = () => {
   return(
     <CustomAside animate={{
       display: "initial",
@@ -61,4 +61,4 @@ const CustomAside = styled(motion.aside)`
   }
 `
 
-export default Aside;
+export default TopAside;
