@@ -71,11 +71,11 @@ const CustomDiary = styled(motion.div)`
   height: 110px;
 
   h2{
-    padding-left: 5px;
+    padding: 2px 5px;
     margin: 0px;
   }
   .diary_content{
-    padding: 5px;
+    padding: 2px 5px;
     font-size: 13px;
   }
   .info{

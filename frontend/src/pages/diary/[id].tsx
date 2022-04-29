@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
-import { tomorrowNight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import {vscDarkPlus} from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 const Diary = () => {
 
@@ -15,33 +15,46 @@ const Diary = () => {
   }
 
   const tags = ["TagTagTagTag", "TagTagTagTag", "TagTagTagTag", "TagTagTagTag"];
+
+  const ankerLink = ({ node, ...props }) => {
+    return (
+        <a href={"#"+node.position?.start.line.toString()}>{props.children}</a>
+    );
+  }
   
   const markdown = `
-  # A demo of \`react-markdown\`
-  A paragraph with *emphasis* and **strong importance**.
-
+  # これはテストです。
+  A paragraph with *emphasis* and **strong importance**.  
+  これはテストです。気にしないでください。  
+  文末にスペースを2回しないといけないのが面倒くさいかもどうすればええんやろうか
+  
   > A block quote with ~strikethrough~ and a URL: https://reactjs.org.
   
+  文末にスペースを2回しないといけないのが面倒くさいかもどうすればええんやろうか  
   * Lists
-  * [ ] todo
+  * [ ] to do
   * [x] done
   
-  A table:
+  1. test
+  2. test
   
   | a | b |
   | - | - |
-  | - | - |
-  | - | - |
-  | - | - |
+  | a | b |
+  | a | b |
+  | a | b |
+  | a | b |
+  | a | b |
+  | a | b |
 
   Here is some JavaScript code:
 
-  ~~~js
+  ~~~js:index.js
   import React from 'react'
   import ReactDOM from 'react-dom'
   import ReactMarkdown from 'react-markdown'
   import MyFancyRule from './components/my-fancy-rule.js'
-
+  const Diary = "test";
   ReactDOM.render(
     <ReactMarkdown
       components={{
@@ -56,6 +69,10 @@ const Diary = () => {
     document.querySelector('#content')
   )
   ~~~
+
+  | a | b  |  c |  d  |
+  | - | :- | -: | :-: |
+  # これはテストです2。
   `
 
   return(
@@ -76,6 +93,11 @@ const Diary = () => {
         </div>
       </div>
       <ReactMarkdown
+        allowedElements={["h1"]}
+        components={{h1: ankerLink}}
+        children={markdown}
+      />
+      <ReactMarkdown
         children={markdown}
         remarkPlugins={[remarkGfm]}
         className="markdown"
@@ -85,9 +107,8 @@ const Diary = () => {
             return !inline && match ? (
               <SyntaxHighlighter
                 children={String(children).replace(/\n$/, '')}
-                style={tomorrowNight}
+                style={vscDarkPlus}
                 language={match[1]}
-                PreTag="div"
                 {...props}
               />
             ) : (
@@ -130,6 +151,10 @@ const CustomDiary = styled(motion.div)`
   }
   .markdown{
     margin: 15px 25px;
+    wthite-space: pre-wrap;
+  }
+
+  .markdown p{
   }
 `
 
