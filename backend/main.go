@@ -3,10 +3,14 @@ package main
 import (
 	"fmt"
 	"net/http"
+
+	"github.com/yusuke/yusuke_blog/blog"
 )
 
 func main() {
 	http.HandleFunc("/test", echoTest)
+	http.HandleFunc("/tag/get", blog.GetAllTags)
+	http.HandleFunc("/tag/post", blog.CreateTag)
 	http.HandleFunc("/", echoHello)
 	http.ListenAndServe(":8000", nil)
 }
