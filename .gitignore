@@ -1,18 +1,18 @@
 # front
-frontend/node_modules
+app/node_modules
 /.pnp
 .pnp.js
 /coverage
-frontend/.next/
-frontend/out/
-frontend/.env.local
-frontend/.env.development.local
-frontend/.env.test.local
-frontend/.env.production.local
-frontend/build
-frontend/npm-debug.log*
-frontend/yarn-debug.log*
-frontend/yarn-error.log*
+app/.next/
+app/out/
+app/.env.local
+app/.env.development.local
+app/.env.test.local
+app/.env.production.local
+app/build
+app/npm-debug.log*
+app/yarn-debug.log*
+app/yarn-error.log*
 
 .env
 

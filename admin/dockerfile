@@ -1,0 +1,6 @@
+FROM node:latest
+ENV NODE_VERSION 16.14.2
+WORKDIR /admin
+COPY . .
+RUN yarn install
+EXPOSE 3001
