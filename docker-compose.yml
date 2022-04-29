@@ -21,8 +21,14 @@ services:
     tty: true
     depends_on:
       - mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_HOST: dockerMySQL
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
   mysql:
-    container_name: db
+    container_name: dockerMySQL
     image: mysql:5.7.10
     ports:
       - 3306:3306

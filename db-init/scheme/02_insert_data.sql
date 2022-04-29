@@ -1,22 +1,22 @@
 -- articleテーブル
-INSERT INTO article ( article, isPublish, publishDate, updateDate) VALUE
-('testtesttesttest', 0, '2022/01/01 00:00', '2022/01/01 00:00'),
-('testtesttesttest', 0, '2022/01/01 00:00', '2022/01/01 00:00'),
-('testtesttesttest', 0, '2022/01/01 00:00', '2022/01/01 00:00'),
-('testtesttesttest', 0, '2022/01/01 00:00', '2022/01/01 00:00'),
-('testtesttesttest', 0, '2022/01/01 00:00', '2022/01/01 00:00'),
-('testtesttesttest', 0, '2022/01/01 00:00', '2022/01/01 00:00'),
-('testtesttesttest', 0, '2022/01/01 00:00', '2022/01/01 00:00'),
-('testtesttesttest', 0, '2022/01/01 00:00', '2022/01/01 00:00'),
-('testtesttesttest', 0, '2022/01/01 00:00', '2022/01/01 00:00'),
-('testtesttesttest', 0, '2022/01/01 00:00', '2022/01/01 00:00'),
-('testtesttesttest', 0, '2022/01/01 00:00', '2022/01/01 00:00'),
-('testtesttesttest', 0, '2022/01/01 00:00', '2022/01/01 00:00'),
-('testtesttesttest', 0, '2022/01/01 00:00', '2022/01/01 00:00'),
-('testtesttesttest', 0, '2022/01/01 00:00', '2022/01/01 00:00'),
-('testtesttesttest', 0, '2022/01/01 00:00', '2022/01/01 00:00'),
-('testtesttesttest', 0, '2022/01/01 00:00', '2022/01/01 00:00'),
-('testtesttesttest', 0, '2022/01/01 00:00', '2022/01/01 00:00');
+INSERT INTO article ( article) VALUE
+('testtesttesttest'),
+('testtesttesttest'),
+('testtesttesttest'),
+('testtesttesttest'),
+('testtesttesttest'),
+('testtesttesttest'),
+('testtesttesttest'),
+('testtesttesttest'),
+('testtesttesttest'),
+('testtesttesttest'),
+('testtesttesttest'),
+('testtesttesttest'),
+('testtesttesttest'),
+('testtesttesttest'),
+('testtesttesttest'),
+('testtesttesttest'),
+('testtesttesttest');
 
 -- tagテーブル
 INSERT INTO tag ( name ) VALUE

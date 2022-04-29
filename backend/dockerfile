@@ -6,7 +6,6 @@ COPY . .
 
 RUN apk upgrade --update && \
     apk --no-cache add git
-RUN go mod init go_docker
 RUN go mod tidy && \
     go install github.com/cosmtrek/air@v1.27.3
 
