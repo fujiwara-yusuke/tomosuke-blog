@@ -1,16 +1,9 @@
 import Image from 'next/image';
 import styled from 'styled-components';
-import { motion } from "framer-motion";
 
 const TopAside = () => {
   return(
-    <CustomAside animate={{
-      display: "initial",
-      opacity: [0, 1],
-      transition: {
-        duration: 1
-      }
-    }}>
+    <CustomAside>
       <div className='aside_wrapper'>
         <div className='profile_img'>
           <div className='img_wrapper'>
@@ -33,8 +26,7 @@ const TopAside = () => {
   )
 }
 
-const CustomAside = styled(motion.aside)`
-  display: none;
+const CustomAside = styled.div`
   width: 25%;
   padding-left: 10px;
   .aside_wrapper {
