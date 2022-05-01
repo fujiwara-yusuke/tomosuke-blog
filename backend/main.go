@@ -4,11 +4,13 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/yusuke/yusuke_blog/admin"
 	"github.com/yusuke/yusuke_blog/blog"
 )
 
 func main() {
 	http.HandleFunc("/test", echoTest)
+	http.HandleFunc("/login", admin.Login)
 	http.HandleFunc("/tag/get", blog.GetAllTags)
 	http.HandleFunc("/tag/post", blog.CreateTag)
 	http.HandleFunc("/", echoHello)

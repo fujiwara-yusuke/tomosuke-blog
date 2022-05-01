@@ -1,11 +1,8 @@
 import type { NextPage } from 'next';
+import LoginForm from 'components/LoginForm';
 
 const Home: NextPage = () => {
-  return (
-    <div>
-      <h1>My Template</h1>
-    </div>
-  );
+  return <LoginForm/>
 };
 
 export default Home;

@@ -1,5 +1,5 @@
 -- articleテーブル
-INSERT INTO article ( article) VALUE
+INSERT INTO article ( article ) VALUE
 ('testtesttesttest'),
 ('testtesttesttest'),
 ('testtesttesttest'),
@@ -27,3 +27,6 @@ INSERT INTO tag ( name ) VALUE
 ('db'),
 ('docker'),
 ('golang');
+
+INSERT INTO member ( name, email, password ) VALUE
+('ゆすけ_管理者', 'test@test.com', 'yusuke_admin');
