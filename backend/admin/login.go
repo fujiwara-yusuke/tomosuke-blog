@@ -12,8 +12,11 @@ import (
 )
 
 type Admin struct {
+	Id       int    `json:"id"       db:"id"`
+	Name     string `json:"name"    db:"name"`
 	Email    string `json:"email"    db:"email"`
 	Password string `json:"password" db:"password"`
+	Level    string `json:"Level" db:"Level"`
 }
 
 type Post struct {
@@ -55,30 +58,30 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	} else {
 		log.Println("CreateTag: データベース接続成功")
 	}
-	rows, err := db.Query("select email, password from member where email = ? and password = ?", tmpAdmin.Email, tmpAdmin.Password)
+
+	rows, err := db.Query("select id, name, email, password from member where email = ? and password = ?", tmpAdmin.Email, tmpAdmin.Password)
 	defer db.Close()
 
 	var admin Admin
+
 	for rows.Next() {
-		err = rows.Scan(&admin.Email, &admin.Password)
+		err = rows.Scan(&admin.Id, &admin.Name, &admin.Email, &admin.Password)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 	}
-	if len(admin.Email) > 0 && len(admin.Password) > 0 {
-		postOK := Post{http.StatusOK, admin}
-		res, _ := json.Marshal(postOK)
-		log.Printf("email: %s, password: %s", admin.Email, admin.Password)
-		w.Header().Set("Content-Type", "application/json")
-		w.Write(res)
-	} else {
-		var failLogin = errors.New("会員登録されておりません")
-		ThrowError(w, failLogin)
-	}
-}
 
-func ThrowError(w http.ResponseWriter, err error) {
-	log.Println(err)
-	http.Error(w, err.Error(), http.StatusInternalServerError)
+	if admin == (Admin{}) {
+		var failLogin = errors.New("会員登録されておりません")
+		http.Error(w, failLogin.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	CreateSession(w, r, &admin)
+
+	postOK := Post{http.StatusOK, admin}
+	res, _ := json.Marshal(postOK)
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(res)
 }

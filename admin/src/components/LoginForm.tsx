@@ -1,18 +1,20 @@
-import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { Axios, LoginUrl } from 'utils/api';
+import { useCookies } from "react-cookie";
 
 interface LoginInfo{
-  email:     string
-  password:  string
+  email:      string
+  password:   string
+  crsf_token: string
 }
 
 const LoginForm = () => {
-
-  const [failLogin, setFailLogin] = useState<boolean>(false)
+  const router = useRouter();
   const { register, handleSubmit, formState: { errors } } = useForm<LoginInfo>();
-  
+  const [cookies, setCookie] = useCookies();
+
   const onSubmit = async (data: LoginInfo) => {
     try{
       const res = await Axios.post(LoginUrl, {
@@ -20,43 +22,46 @@ const LoginForm = () => {
         password: data.password
       })
       if(res.status == 200){
-        console.log("認証成功");
-        setFailLogin(false);
+        console.log(res)
+        setCookie('admin', {
+          id: res.data.result.id,
+          name: res.data.result.name,
+          email: res.data.result.email,
+          password: res.data.result.password,
+        });
+        router.push('/admin');
       }
     }catch(err){
-      setFailLogin(true);
+      console.log(err);
     }
   };
 
   return (
     <LoginDisplay>
-      {
-        failLogin ?
-        <div className='fail_login'>ログインできませんでした</div>
-        :
-        null
-      }
-      <h1>ログイン画面</h1>
-        <div className='form_wrapper'>
-          <div className="item_form">
-            <div className="email">
-              メールアドレス
-              {errors.email && errors.email.type === "required" && <span className="err_msg">入力してください</span>}
-              {errors.email && errors.email.type === "pattern" && <span className="err_msg">メールアドレスのパターンが合っていません</span>}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <h1>ログイン画面</h1>
+          <div className='form_wrapper'>
+            <div className="item_form">
+              <input defaultValue="test" {...register("crsf_token", { required: true})} hidden/>
+              <div className="email">
+                メールアドレス
+                {errors.email && errors.email.type === "required" && <span className="err_msg">入力してください</span>}
+                {errors.email && errors.email.type === "pattern"  && <span className="err_msg">メールアドレスのパターンが合っていません</span>}
+              </div>
+              <input type='email' defaultValue={cookies.admin?.email} placeholder='email' {...register("email", { required: true, pattern: /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/})} />
             </div>
-            <input placeholder='email' {...register("email", { required: true, pattern: /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/})} />
-          </div>
-          <div className="item_form">
-            <div className="password">
-              パスワード
-              {errors.password && errors.password.type === "required" && <span className="err_msg">入力してください</span>}
+            <div className="item_form">
+              <div className="password">
+                パスワード
+                {errors.password && errors.password.type === "required" && <span className="err_msg">入力してください</span>}
+              </div>
+              <input type='password' defaultValue={cookies.admin?.password} placeholder='password' {...register("password", { required: true })} autoComplete=''/>
             </div>
-            <input placeholder='password' {...register("password", { required: true })} />
+            <div className="submit_wrapper">
+              <button value="ログイン" type='submit'>ログイン</button>
+            </div>
           </div>
-          <div className="submit_wrapper">
-            <button value="ログイン" onClick={handleSubmit(onSubmit)}>ログイン</button>
-          </div>
-        </div>
+      </form>
     </LoginDisplay>
   );
 };

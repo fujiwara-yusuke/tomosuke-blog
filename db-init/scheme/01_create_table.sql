@@ -39,7 +39,6 @@ CREATE TABLE member (
   email varchar(255) NOT NULL UNIQUE,
   password varchar(255) NOT NULL,
   level smallint(5) NOT NULL DEFAULT 0,
-  email varchar(255) NOT NULL UNIQUE,
   createDate datetime NOT NULL DEFAULT now(),
   PRIMARY KEY(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -1,12 +1,15 @@
 import 'styles/globals.css';
 import Layout from 'components/Layout';
 import type { AppProps } from 'next/app';
+import { CookiesProvider } from "react-cookie";
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <CookiesProvider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </CookiesProvider>
   );
 }
 

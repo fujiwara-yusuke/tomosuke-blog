@@ -1,38 +1,37 @@
-import React, {createContext, useState, ReactNode} from "react";
+import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 
-interface Admin{
-  id: number
-  email: string
-  password: string
+interface AdminContextValue {
+  isLogin: boolean
+  setIsLogin: (isLogin: boolean) => void
 }
 
-interface ContextInterface {
-  admin: Admin | null | undefined
-  isAuth: boolean
-  setAdmin: (admin: Admin) => void
-  login: () => void
-  logout: () => void
+const AdminContext = createContext<AdminContextValue | undefined>(undefined);
+
+interface Props {
+  children: ReactNode;
 }
 
-const adminContext = createContext<ContextInterface | undefined>(undefined);
+const AdminProvider = ({children}: Props) => {
 
-const AdminContextProvider = (children: any) => {
-  const [admin, setAdmin] = useState<Admin|null|undefined>()
-  const [isAuth, setIsAuth] = useState<boolean>(false);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [cookies] = useCookies();
 
-  const login = () => {
-    setIsAuth(true);
-  }
-
-  const logout = () => {
-    setIsAuth(false);
-  }
+  useEffect(() => {
+    console.log(cookies)
+    if(!cookies.admin) {
+      setIsLogin(false);
+    }
+  }, [cookies]);
 
   return(
-    <adminContext.Provider value={{admin, setAdmin, isAuth, login, logout}}>
+    <AdminContext.Provider value={{isLogin, setIsLogin}}>
       {children}
-    </adminContext.Provider>
-  )
+    </AdminContext.Provider>
+  );
 }
 
-export default AdminContextProvider;
+export const useAdminContext = () => {
+  return useContext(AdminContext)
+}
+export default AdminProvider;
