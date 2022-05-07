@@ -2,12 +2,12 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { Axios, LoginUrl } from 'utils/api';
+import TextField from '@mui/material/TextField';
 import { useCookies } from "react-cookie";
 
 interface LoginInfo{
   email:      string
   password:   string
-  crsf_token: string
 }
 
 const LoginForm = () => {
@@ -22,7 +22,6 @@ const LoginForm = () => {
         password: data.password
       })
       if(res.status == 200){
-        console.log(res)
         setCookie('admin', {
           id: res.data.result.id,
           name: res.data.result.name,
@@ -42,7 +41,6 @@ const LoginForm = () => {
         <h1>ログイン画面</h1>
           <div className='form_wrapper'>
             <div className="item_form">
-              <input defaultValue="test" {...register("crsf_token", { required: true})} hidden/>
               <div className="email">
                 メールアドレス
                 {errors.email && errors.email.type === "required" && <span className="err_msg">入力してください</span>}
@@ -79,9 +77,11 @@ const LoginDisplay = styled.div`
     margin: auto;
     border-radius: 10px;
   }
-
-  div.email,
-  div.password{
+  div.item_form{
+    width: 100%;
+    padding: 10px;
+  }
+  div.item_form div{
     color: #000000;
   }
   div.item_form input{
@@ -89,10 +89,6 @@ const LoginDisplay = styled.div`
     padding: 10px;
     width: 100%;
     font-size: 16px;
-  }
-  div.item_form{
-    width: 100%;
-    padding: 10px;
   }
   div.submit_wrapper{
     width: 100%;
@@ -104,13 +100,6 @@ const LoginDisplay = styled.div`
     color: red;
     font-size:10px;
     margin: 10px;
-  }
-
-  .fail_login{
-    background: red;
-    color: #FFFFFFF;
-    opacity: 0.8;
-    text-align: center;
   }
 `
 

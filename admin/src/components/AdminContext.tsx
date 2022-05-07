@@ -1,37 +1,37 @@
-import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
+import React, {createContext, useContext, FC, useState} from 'react';
 
-interface AdminContextValue {
-  isLogin: boolean
-  setIsLogin: (isLogin: boolean) => void
+interface Tag {
+  id: number;
+  name: string;
+  date: Date;
+};
+
+export interface authContextType {
+  tagList: Tag[];
+  setTagList: (tagList: Tag[]) => void;
+};
+
+function createCtx<ContextType>() {
+  const ctx = createContext<ContextType | undefined>(undefined);
+  function useCtx() {
+    const c = useContext(ctx);
+    if (!c) throw new Error("useCtx must be inside a Provider with a value");
+    return c;
+  }
+  return [useCtx, ctx.Provider] as const;
 }
 
-const AdminContext = createContext<AdminContextValue | undefined>(undefined);
+export const [useAdminContext, SetAdminProvider] = createCtx<authContextType>();
 
-interface Props {
-  children: ReactNode;
-}
+const useAuthCtx = (): authContextType => {
+  const [tagList, setTagList] = useState<Tag[]>([]);
+  
+  return { tagList, setTagList};
+};
 
-const AdminProvider = ({children}: Props) => {
+const AdminProvider: FC = (props) => {
+  const auth = useAuthCtx();
+  return <SetAdminProvider value={auth}>{props.children}</SetAdminProvider>;
+};
 
-  const [isLogin, setIsLogin] = useState<boolean>(false);
-  const [cookies] = useCookies();
-
-  useEffect(() => {
-    console.log(cookies)
-    if(!cookies.admin) {
-      setIsLogin(false);
-    }
-  }, [cookies]);
-
-  return(
-    <AdminContext.Provider value={{isLogin, setIsLogin}}>
-      {children}
-    </AdminContext.Provider>
-  );
-}
-
-export const useAdminContext = () => {
-  return useContext(AdminContext)
-}
 export default AdminProvider;

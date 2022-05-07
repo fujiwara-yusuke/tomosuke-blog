@@ -40,7 +40,7 @@ const TopHeader = () => {
         <Title>
           <Link href='/'>
             <a>
-              <h1>Yusuke-Diary</h1>
+              <h1>Diary</h1>
             </a>
           </Link>
           <div className='menu_list'>

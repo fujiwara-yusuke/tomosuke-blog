@@ -13,25 +13,17 @@ const Layout:FC = ({ children }: Props) => {
   const [cookies] = useCookies();
 
   useEffect(() => {
-    if(router.pathname.includes('admin') && !cookies.admin){
+    if(router.pathname.includes('admin') && cookies.admin == undefined){
       router.push('/');
     }
   }, [cookies])
-
-  const displayAdmin = () => {
-    if(router.route == '/'){
-      return <div className='content'>{children}</div>
-    }else{
-      return cookies.admin != undefined ? <div className='content'>{children}</div> : null
-    }
-  }
 
   return (
     <>
       <Head>
         <title>admin</title>
       </Head>
-      {displayAdmin()}
+      <div className='content'>{children}</div>
     </>
   );
 };

@@ -9,3 +9,5 @@ export const Axios = axios.create({
 });
 
 export const LoginUrl = "api/login";
+export const tagListUrl = "api/tag/get";
+export const updateTagNmae = "api/tag/update";

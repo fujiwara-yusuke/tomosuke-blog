@@ -2,16 +2,20 @@ package blog
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
+	"github.com/yusuke/yusuke_blog/admin"
 	"github.com/yusuke/yusuke_blog/database"
 )
 
 type Tag struct {
-	Id   int    `json:"id"`
-	Name string `json:"name"`
+	Id   int       `json:"id"`
+	Name string    `json:"name"`
+	Date time.Time `json:"date"`
 }
 
 type Get struct {
@@ -24,6 +28,14 @@ type Post struct {
 }
 
 func GetAllTags(w http.ResponseWriter, r *http.Request) {
+	isAdmin := admin.CheckAdmin(r)
+
+	if !isAdmin {
+		err := errors.New("こいつ...管理者じゃない!!!!")
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
 	db, err := database.Init()
 
 	if err != nil {
@@ -40,7 +52,7 @@ func GetAllTags(w http.ResponseWriter, r *http.Request) {
 
 	for rows.Next() {
 		tag := Tag{}
-		err = rows.Scan(&tag.Id, &tag.Name)
+		err = rows.Scan(&tag.Id, &tag.Name, &tag.Date)
 		if err != nil {
 			panic(err)
 		}
@@ -91,4 +103,42 @@ func CreateTag(w http.ResponseWriter, r *http.Request) {
 			w.Write(res)
 		}
 	}
+}
+
+func UpdateTag(w http.ResponseWriter, r *http.Request) {
+
+	err := r.ParseForm()
+	if err != nil {
+		return
+	}
+
+	var tag Tag
+	if err := json.NewDecoder(r.Body).Decode(&tag); err != nil {
+		return
+	}
+
+	db, err := database.Init()
+
+	if err != nil {
+		log.Println("CreateTag: データベース接続失敗")
+		log.Println(err.Error())
+		return
+	}
+
+	defer db.Close()
+
+	_, err = db.Exec("UPDATE tag SET name = ? where id = ?", tag.Name, tag.Id)
+
+	if err != nil {
+		return
+	}
+
+	postOK := Post{http.StatusOK}
+	res, err := json.Marshal(postOK)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(res)
 }
